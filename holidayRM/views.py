@@ -12,18 +12,22 @@ from django.contrib.auth.models import User
 from .serializers import VacationSerializer, UserSerializer
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def vacation_list(request):
-    if request.method == 'GET':
-        vacations = Vacation.objects.all()
-        serializer = VacationSerializer(vacations, many=True)
-        return Response(serializer.data)
+    vacations = Vacation.objects.all()
+    serializer = VacationSerializer(vacations, many=True)
+    return Response(serializer.data)
 
-    if request.method == 'POST':
-        serializer = VacationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def vacation_post(request):
+    serializer = VacationSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -54,7 +58,7 @@ def login(request):
         return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
     token, created = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(instance=user)
-    return Response({"token": token.key, "user": serializer.data})
+    return Response({"access_token": token.key, "user": serializer.data})
 
 
 @api_view(['POST'])
