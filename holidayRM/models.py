@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Vacation(models.Model):
-    dateFrom = models.DateField(default=timezone.now())
-    dateTo = models.DateField(default=timezone.now())
+    date_from = models.DateField(default=timezone.now())
+    date_to = models.DateField(default=timezone.now())
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_approved = models.BooleanField(default=False)

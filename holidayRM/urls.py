@@ -34,13 +34,15 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('admin/', admin.site.urls),
-    path('vacations/', views.vacation_list),
+    path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('admin', admin.site.urls),
+    path('vacations', views.user_vacation_list),
+    path('vacations/all', views.all_vacations),
     path('vacations/add', views.vacation_post),
     path('vacations/<int:id>', views.vacation_detail),
-    re_path('login', views.login),
-    re_path('signup', views.signup),
-    re_path('test_token', views.test_token)
+    path('vacations/approve/<int:id>', views.approve_vacation),
+    path('login', views.login),
+    path('signup', views.signup),
+    path('test_token', views.test_token)
 ]
