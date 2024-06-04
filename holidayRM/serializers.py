@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class VacationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vacation
-        fields = ['id', 'date_from', 'date_to', 'user']
+        fields = ['id', 'date_from', 'date_to']
 
 
 class VacationGetSerializer(serializers.ModelSerializer):

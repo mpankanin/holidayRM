@@ -20,8 +20,8 @@ from .serializers import VacationSerializer, UserSerializer, VacationGetSerializ
 @permission_classes([IsAuthenticated])
 def user_vacation_list(request):
     vacations = Vacation.objects.filter(user=request.user)
-    serializer = VacationSerializer(vacations, many=True)
-    return Response(serializer.data)
+    get_serializer = VacationGetSerializer(vacations, many=True)
+    return Response(get_serializer.data)
 
 
 # send a new vacation's request
@@ -34,8 +34,8 @@ def vacation_post(request):
         date_from = serializer.validated_data['date_from']
         date_to = serializer.validated_data['date_to']
         overlapping_vacations = Vacation.objects.filter(user=request.user,
-                                                        dateFrom__lte=date_to,
-                                                        dateTo__gte=date_from)
+                                                        date_from__lte=date_to,
+                                                        date_to__gte=date_from)
         if overlapping_vacations.exists():
             return Response({"detail": "You already have vacations in the requested dates."}
                             , status=status.HTTP_400_BAD_REQUEST)
@@ -79,8 +79,8 @@ def vacation_detail(request, id):
         return Response(status=status.HTTP_403_FORBIDDEN)
 
     if request.method == 'GET':
-        serializer = VacationSerializer(vacation)
-        return Response(serializer.data)
+        get_serializer = VacationGetSerializer(vacation)
+        return Response(get_serializer.data)
 
     if request.method == 'PUT':
         if vacation.is_approved:
@@ -88,8 +88,8 @@ def vacation_detail(request, id):
                             status=status.HTTP_403_FORBIDDEN)
         serializer = VacationSerializer(vacation, data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            get_serializer = VacationGetSerializer(serializer)
+            vacation = serializer.save()
+            get_serializer = VacationGetSerializer(vacation)
             return Response(get_serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
