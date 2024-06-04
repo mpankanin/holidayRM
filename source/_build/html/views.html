@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Views Module &#8212; holidayRM v.1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=6c7b0eaa"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Urls Module" href="urls.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-holidayRM.views">
+<span id="views-module"></span><h1>Views Module<a class="headerlink" href="#module-holidayRM.views" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="holidayRM.views.all_vacations">
+<span class="sig-prename descclassname"><span class="pre">holidayRM.views.</span></span><span class="sig-name descname"><span class="pre">all_vacations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/holidayRM/views.html#all_vacations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#holidayRM.views.all_vacations" title="Link to this definition">¶</a></dt>
+<dd><p>Get a list of all vacations. Only accessible by staff users.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of all vacations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="holidayRM.views.approve_vacation">
+<span class="sig-prename descclassname"><span class="pre">holidayRM.views.</span></span><span class="sig-name descname"><span class="pre">approve_vacation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/holidayRM/views.html#approve_vacation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#holidayRM.views.approve_vacation" title="Link to this definition">¶</a></dt>
+<dd><p>Approve a vacation request. Only accessible by staff users.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – The request object.</p></li>
+<li><p><strong>id</strong> – The id of the vacation to approve.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The approved vacation object or an error message.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="holidayRM.views.login">
+<span class="sig-prename descclassname"><span class="pre">holidayRM.views.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/holidayRM/views.html#login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#holidayRM.views.login" title="Link to this definition">¶</a></dt>
+<dd><p>Authenticate a user and return a token.</p>
+<p>This view expects a POST request with ‘username’ and ‘password’ in the request data.
+If the credentials are valid, it returns a token and user data.
+If the credentials are not valid, it returns a 404 error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Response object with the token and user data if the credentials are valid, or a 404 error if they are not.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="holidayRM.views.signup">
+<span class="sig-prename descclassname"><span class="pre">holidayRM.views.</span></span><span class="sig-name descname"><span class="pre">signup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/holidayRM/views.html#signup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#holidayRM.views.signup" title="Link to this definition">¶</a></dt>
+<dd><p>Register a new user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created user object or an error message.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="holidayRM.views.test_token">
+<span class="sig-prename descclassname"><span class="pre">holidayRM.views.</span></span><span class="sig-name descname"><span class="pre">test_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/holidayRM/views.html#test_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#holidayRM.views.test_token" title="Link to this definition">¶</a></dt>
+<dd><p>Test if a token is valid.</p>
+<p>This view expects a GET request with a valid token in the ‘Authorization’ header.
+If the token is valid, it returns a success message.
+If the token is not valid, it returns a 403 error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Response object with a success message if the token is valid, or a 403 error if it is not.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="holidayRM.views.user_vacation_list">
+<span class="sig-prename descclassname"><span class="pre">holidayRM.views.</span></span><span class="sig-name descname"><span class="pre">user_vacation_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/holidayRM/views.html#user_vacation_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#holidayRM.views.user_vacation_list" title="Link to this definition">¶</a></dt>
+<dd><p>Get a list of vacations for the authenticated user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of vacations for the authenticated user.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="holidayRM.views.vacation_detail">
+<span class="sig-prename descclassname"><span class="pre">holidayRM.views.</span></span><span class="sig-name descname"><span class="pre">vacation_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/holidayRM/views.html#vacation_detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#holidayRM.views.vacation_detail" title="Link to this definition">¶</a></dt>
+<dd><p>Get, update, or delete a vacation by id. Only the owner of the vacation can perform these actions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – The request object.</p></li>
+<li><p><strong>id</strong> – The id of the vacation to get, update, or delete.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The vacation object, a success message, or an error message.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="holidayRM.views.vacation_post">
+<span class="sig-prename descclassname"><span class="pre">holidayRM.views.</span></span><span class="sig-name descname"><span class="pre">vacation_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/holidayRM/views.html#vacation_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#holidayRM.views.vacation_post" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new vacation request for the authenticated user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created vacation object or an error message.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">holidayRM</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializers.html">Serializers Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="urls.html">Urls Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Views Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#holidayRM.views.all_vacations"><code class="docutils literal notranslate"><span class="pre">all_vacations()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#holidayRM.views.approve_vacation"><code class="docutils literal notranslate"><span class="pre">approve_vacation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#holidayRM.views.login"><code class="docutils literal notranslate"><span class="pre">login()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#holidayRM.views.signup"><code class="docutils literal notranslate"><span class="pre">signup()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#holidayRM.views.test_token"><code class="docutils literal notranslate"><span class="pre">test_token()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#holidayRM.views.user_vacation_list"><code class="docutils literal notranslate"><span class="pre">user_vacation_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#holidayRM.views.vacation_detail"><code class="docutils literal notranslate"><span class="pre">vacation_detail()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#holidayRM.views.vacation_post"><code class="docutils literal notranslate"><span class="pre">vacation_post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="urls.html" title="previous chapter">Urls Module</a></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Milosz Pankanin.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/views.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
