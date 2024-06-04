@@ -19,6 +19,12 @@ from .serializers import VacationSerializer, UserSerializer, VacationGetSerializ
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def user_vacation_list(request):
+    """
+    Get a list of vacations for the authenticated user.
+
+    :param request: The request object.
+    :return: A list of vacations for the authenticated user.
+    """
     vacations = Vacation.objects.filter(user=request.user)
     get_serializer = VacationGetSerializer(vacations, many=True)
     return Response(get_serializer.data)
@@ -29,6 +35,12 @@ def user_vacation_list(request):
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def vacation_post(request):
+    """
+    Create a new vacation request for the authenticated user.
+
+    :param request: The request object.
+    :return: The created vacation object or an error message.
+    """
     serializer = VacationSerializer(data=request.data)
     if serializer.is_valid():
         date_from = serializer.validated_data['date_from']
@@ -50,6 +62,13 @@ def vacation_post(request):
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def approve_vacation(request, id):
+    """
+    Approve a vacation request. Only accessible by staff users.
+
+    :param request: The request object.
+    :param id: The id of the vacation to approve.
+    :return: The approved vacation object or an error message.
+    """
     if not request.user.is_staff:
         return Response(status=status.HTTP_403_FORBIDDEN)
 
@@ -70,6 +89,13 @@ def approve_vacation(request, id):
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def vacation_detail(request, id):
+    """
+    Get, update, or delete a vacation by id. Only the owner of the vacation can perform these actions.
+
+    :param request: The request object.
+    :param id: The id of the vacation to get, update, or delete.
+    :return: The vacation object, a success message, or an error message.
+    """
     try:
         vacation = Vacation.objects.get(pk=id)
     except Vacation.DoesNotExist:
@@ -102,6 +128,12 @@ def vacation_detail(request, id):
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def all_vacations(request):
+    """
+    Get a list of all vacations. Only accessible by staff users.
+
+    :param request: The request object.
+    :return: A list of all vacations.
+    """
     if not request.user.is_staff:
         return Response(status=status.HTTP_403_FORBIDDEN)
     vacations = Vacation.objects.all()
@@ -114,6 +146,12 @@ def all_vacations(request):
 # sing up a new user
 @api_view(['POST'])
 def signup(request):
+    """
+    Register a new user.
+
+    :param request: The request object.
+    :return: The created user object or an error message.
+    """
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -128,6 +166,16 @@ def signup(request):
 # login into system - returns valid token
 @api_view(['POST'])
 def login(request):
+    """
+    Authenticate a user and return a token.
+
+    This view expects a POST request with 'username' and 'password' in the request data.
+    If the credentials are valid, it returns a token and user data.
+    If the credentials are not valid, it returns a 404 error.
+
+    :param request: The request object.
+    :return: A Response object with the token and user data if the credentials are valid, or a 404 error if they are not.
+    """
     user = get_object_or_404(User, username=request.data['username'])
     if not user.check_password(request.data['password']):
         return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
@@ -141,6 +189,16 @@ def login(request):
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def test_token(request):
+    """
+    Test if a token is valid.
+
+    This view expects a GET request with a valid token in the 'Authorization' header.
+    If the token is valid, it returns a success message.
+    If the token is not valid, it returns a 403 error.
+
+    :param request: The request object.
+    :return: A Response object with a success message if the token is valid, or a 403 error if it is not.
+    """
     return Response("passed for{}".format(request.user.username))
 
 
